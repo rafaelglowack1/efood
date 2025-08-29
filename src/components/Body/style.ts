@@ -1,14 +1,6 @@
 import styled from "styled-components";
 import { cores } from "../../styles";
 
-export const Container = styled.div`
-    max-width: 1024px;
-    width: 100%;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-content: space-between;
-`
 export const Secao = styled.div`
     width: 472px;
     background-color: #fff;
@@ -47,6 +39,9 @@ export const Botao = styled.a`
     font-weight: bold;
     border-radius: 2px;
     margin: 12px 0 0 8px;
+    position: absolute;
+    bottom: 8px;
+
 `
 export const TipoContainer = styled.div`
     display: flex;
@@ -69,4 +64,12 @@ export const Tipo = styled.div`
     p{
         padding: 2px 8px;
     }
+`
+export const Container = styled.div`
+    max-width: 1024px;
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
 `

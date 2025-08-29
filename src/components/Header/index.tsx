@@ -1,11 +1,12 @@
-import { Imagem,Text } from "./style";
+import {Background, Text } from "./style";
 import logo from '../../images/logo.svg'
 
+
 const Header = () => (
-    <Imagem>
+    <Background>
         <img src={logo} alt="" />
         <Text >Viva experiências gastronômicas <br/> no conforto da sua casa</Text>
-    </Imagem>
+    </Background>
 )
 
 export default Header
