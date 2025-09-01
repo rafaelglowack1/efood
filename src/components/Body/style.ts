@@ -19,15 +19,15 @@ export const Secao = styled.div`
 
 `
 export const Title = styled.h2`
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
-    padding: 6px 6px 16px 6px;
+    padding: 6px 6px 16px 0;
     margin-left: 6px;
 `
 export const Text = styled.p`
     font-size: 14px;
     line-height: 22px;
-    margin: 0 0 18px 8px;
+    margin: 0 6px 18px 6px;
 `
 export const Botao = styled.a`
     diplay: block;

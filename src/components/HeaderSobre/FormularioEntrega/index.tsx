@@ -24,7 +24,7 @@ const FormularioEntrega = ({ onFinalizar, onVoltar }: Props) => (
       <Box>
         <div>
           <label>CEP</label>
-          <Campo type="text"  required />
+          <Campo type="number"  required />
         </div>
         <div>
           <label>Número</label>

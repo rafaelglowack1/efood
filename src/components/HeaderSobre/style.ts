@@ -13,18 +13,17 @@ export const BackgroundSobre = styled(Background)`
 `
 export const Box = styled.div`
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr; 
+  display: flex;
   width: 1024px; 
-  place-items: center; 
-  gap: 20px;            
+  justify-content: space-between;
+  font-weight: bold;          
 `
 export const Components = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  align-items: center; 
   cursor: pointer;
   color: ${cores.laranja};
+    margin: 0 20px 0  0 ;
 
   span{
     margin-right: 8px;  
@@ -39,7 +38,7 @@ export const SideBar = styled.div<SidebarProps>`
   width: 450px;
   height: 100vh;
   background-color: ${cores.laranja};
-  color: ${cores.branco};
+  color: ${cores.bege};
   position: fixed;
   top: 0;
   right: 0;
@@ -71,7 +70,7 @@ export const Img = styled.div`
     
 
     div {
-      color: ${cores.branco};
+      color: ${cores.bege};
       font-size: 20px;
       padding-top: 20px;
       z-index: 1;
@@ -105,7 +104,7 @@ export const Caixa = styled.div`
   border-radius: 4px;
   height: 124px;
   display: flex;
-  background-color: ${cores.branco};
+  background-color: ${cores.bege};
   color: ${cores.laranja};
 `;
 export const Div = styled.div`
@@ -144,7 +143,7 @@ export const Trash = styled.div`
   }
 `
 export const Btn = styled.button`
-  background-color: ${cores.branco};
+  background-color: ${cores.bege};
   color: ${cores.laranja};
   width: 90%;
   display: block;

@@ -6,21 +6,22 @@ import Carrinho from "./Carrinho";
 import FormularioEntrega from "./FormularioEntrega";
 import Pagamento from "./Pagamentos";
 import MensagemFinal from "./MensagemFinal";
-import { Carrinho as ListaCarrinho } from "../../pratos";
+import type { ItemCarrinho } from "../pages/Sobre";
 
 type Props = {
   restaurante: string;
   tipo: string;
+  carrinho: ItemCarrinho[];
+  setCarrinho: React.Dispatch<React.SetStateAction<ItemCarrinho[]>>;
 };
 
-const HeaderSobre = ({ restaurante, tipo }: Props) => {
+const HeaderSobre = ({ restaurante, tipo, carrinho, setCarrinho }: Props) => {
   const [sideOpen, setSideOpen] = useState(false);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [mostrarPagamento, setMostrarPagamento] = useState(false);
   const [pedidoFinalizado, setPedidoFinalizado] = useState(false);
 
-  const total = ListaCarrinho.reduce((acc, item) => acc + item.preco, 0);
-  const toogleSidebar = () => setSideOpen(!sideOpen);
+  const toggleSidebar = () => setSideOpen(!sideOpen);
 
   return (
     <>
@@ -28,15 +29,19 @@ const HeaderSobre = ({ restaurante, tipo }: Props) => {
         <Box>
           <Components><Link to="/">Restaurantes</Link></Components>
           <Components><img src={logo} alt="Logo" /></Components>
-          <Components onClick={toogleSidebar}>
-            <span>{ListaCarrinho.length}</span> produto(s) no carrinho
+          <Components onClick={toggleSidebar}>
+            <span>{carrinho.length}</span> produto(s) no carrinho
           </Components>
 
-          <Overlay open={sideOpen} onClick={toogleSidebar} />
+          <Overlay open={sideOpen} onClick={toggleSidebar} />
 
           <SideBar open={sideOpen}>
             {!mostrarFormulario && !mostrarPagamento && !pedidoFinalizado && (
-              <Carrinho total={total} onContinuar={() => setMostrarFormulario(true)} />
+              <Carrinho
+                itens={carrinho}
+                setItens={setCarrinho}
+                onContinuar={() => setMostrarFormulario(true)}
+              />
             )}
 
             {mostrarFormulario && !mostrarPagamento && !pedidoFinalizado && (
@@ -61,10 +66,13 @@ const HeaderSobre = ({ restaurante, tipo }: Props) => {
             )}
 
             {pedidoFinalizado && (
-              <MensagemFinal onFechar={() => {
-                setSideOpen(false);
-                setPedidoFinalizado(false);
-              }} />
+              <MensagemFinal
+                setCarrinho={setCarrinho}
+                onFechar={() => {
+                  setSideOpen(false);
+                  setPedidoFinalizado(false);
+                }}
+              />
             )}
           </SideBar>
         </Box>

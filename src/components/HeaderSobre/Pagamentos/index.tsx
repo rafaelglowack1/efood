@@ -21,21 +21,21 @@ const Pagamento = ({ onPagar, onVoltar }: Props) => (
       <BoxDiv>
         <div>
           <label >Número do cartão</label>
-          <Campo type="text" required />
+          <Campo type="number" required />
         </div>
         <div>
           <label >CVV</label>
-          <Campo type="text" required />
+          <Campo type="number" required />
         </div>
       </BoxDiv>
       <Box>
         <div>
           <label >Mês de vencimento</label>
-          <Campo type="text"  required />
+          <Campo type="number"  required />
         </div>
         <div>
           <label >Ano de vencimento</label>
-          <Campo type="text"  required />
+          <Campo type="number"  required />
         </div>
       </Box>
       <Btn type="submit">Pagar</Btn>
