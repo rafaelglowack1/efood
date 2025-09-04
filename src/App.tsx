@@ -10,7 +10,7 @@ function App() {
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/sobre" element={<Sobre />} />
+        <Route path="/sobre/:id" element={<Sobre />} />
       </Routes>
       <Footer />
     </Router>

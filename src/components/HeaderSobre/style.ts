@@ -1,8 +1,10 @@
 import styled from "styled-components";
-import FundoPerfil from "../../images/fundoperfil.png"
 import { Background } from "../Header/style";
 import { cores } from "../../styles";
 
+interface ImgProps {
+  capa: string
+}
 interface SidebarProps {
   open: boolean;
 }
@@ -23,7 +25,6 @@ export const Components = styled.div`
   align-items: center; 
   cursor: pointer;
   color: ${cores.laranja};
-    margin: 0 20px 0  0 ;
 
   span{
     margin-right: 8px;  
@@ -48,11 +49,11 @@ export const SideBar = styled.div<SidebarProps>`
   z-index: 10;
 
 `
-export const Img = styled.div`
+export const Img = styled.div<ImgProps>`
   width: 100%;
   height: 240px;
   position: relative;
-  background-image: url(${FundoPerfil});
+  background-image: ${({ capa }) => `url(${capa})`};
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

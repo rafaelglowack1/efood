@@ -1,8 +1,15 @@
 import styled from "styled-components";
+import { Text } from "../Body/style"
 import { cores } from "../../styles";
 export type Props = {
     open?: boolean
 }
+
+export const TextDes = styled(Text)`
+    font-size: 14px;
+    line-height: 22px;
+    margin: 12px 6px 18px 0px;
+`
 
 export const SecaoDetalhes = styled.div<Props>`
   position: fixed;

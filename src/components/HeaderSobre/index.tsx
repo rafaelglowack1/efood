@@ -9,13 +9,14 @@ import MensagemFinal from "./MensagemFinal";
 import type { ItemCarrinho } from "../pages/Sobre";
 
 type Props = {
+  capa: string
   restaurante: string;
   tipo: string;
   carrinho: ItemCarrinho[];
   setCarrinho: React.Dispatch<React.SetStateAction<ItemCarrinho[]>>;
 };
 
-const HeaderSobre = ({ restaurante, tipo, carrinho, setCarrinho }: Props) => {
+const HeaderSobre = ({ restaurante, tipo, carrinho, setCarrinho, capa }: Props) => {
   const [sideOpen, setSideOpen] = useState(false);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [mostrarPagamento, setMostrarPagamento] = useState(false);
@@ -78,7 +79,7 @@ const HeaderSobre = ({ restaurante, tipo, carrinho, setCarrinho }: Props) => {
         </Box>
       </BackgroundSobre>
 
-      <Img>
+      <Img capa={capa}>
         <section>
           <div>{tipo}</div>
           <div>{restaurante}</div>

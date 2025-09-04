@@ -1,6 +1,6 @@
 import type { ItemCarrinho } from "../pages/Sobre"; 
-import { Title, Text } from "../Body/style"
-import { SecaoDetalhes, Card, BotaoComprar, Overlay } from "./styles"
+import { Title } from "../Body/style"
+import { SecaoDetalhes, Card, BotaoComprar, Overlay, TextDes } from "./styles"
 
 type DetalhesProps = {
   open: boolean;
@@ -16,8 +16,8 @@ const Detalhes = ({ open, eviarPrato, onClose, setCarrinho }: DetalhesProps) => 
       <img src={eviarPrato.img} alt={eviarPrato.nome} />
       <div>
         <Title>{eviarPrato.nome}</Title>
-        <Text>{eviarPrato.descricao}</Text>
-        <Text>Serve: de 3 a 3 pessoas</Text>
+        <TextDes>{eviarPrato.descricao}</TextDes>
+        <TextDes>Serve: {eviarPrato.serve}</TextDes>
         <BotaoComprar
           type="button"
           onClick={() => {

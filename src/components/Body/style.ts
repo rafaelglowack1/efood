@@ -8,22 +8,36 @@ export const Secao = styled.div`
     margin-top: 40px;
     border: 1px solid ${cores.laranja};
     border-radius: 2px;
-    height: 400px;
+    height: auto;
     position: relative;
+    padding: 0  0 20px;
 
-    img {
+    > img {
         width: 100%;
         height: 210px;
         object-fit: cover;
     }
 
 `
+export const Header = styled.div`
+    display: flex;
+    justify-content: space-between;
+    padding: 6px;
+    margin: 0px 24px 4px 0px;
+
+`
+
 export const Title = styled.h2`
     font-size: 16px;
     font-weight: bold;
-    padding: 6px 6px 16px 0;
-    margin-left: 6px;
 `
+export const Avaliacoes = styled.div`
+  display: flex;
+  height: 20px;
+  gap: 4px;
+  width: 20px;
+`
+
 export const Text = styled.p`
     font-size: 14px;
     line-height: 22px;
@@ -38,9 +52,9 @@ export const Botao = styled.a`
     padding: 6px;
     font-weight: bold;
     border-radius: 2px;
-    margin: 12px 0 0 8px;
     position: absolute;
-    bottom: 8px;
+    margin-left: 6px;
+    bottom: 6px;
 
 `
 export const TipoContainer = styled.div`

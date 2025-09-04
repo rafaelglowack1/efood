@@ -4,29 +4,33 @@ import { cores } from "../../../styles";
 
 export const SecaoSobre = styled(Secao)`
     background-color: ${cores.laranja};
-    width: 306px;
-    height: 338px;
+    margin: 40px 20px 0 0 ;
+    width: 320px;
+    height: autopx;
     border: 8px solid ${cores.laranja};
+    border-radius: 2px;
 
     img{
         height: 160px;
+        border-radius: 2px;
     }
 
 `
 export const TextSobre = styled(Text)`
     color:${cores.bege};
-    margin-bottom: 4px;
+    padding-bottom: 20px;
     font-size: 14px;
 `
 export const TitleSobre = styled(Title)`
     color:${cores.bege};
-    margin-bottom: 2px;
     font-size: 16px;
 `
 export const BtnSobre = styled(Botao)`
     color:${cores.laranja};
     background-color: ${cores.bege};
-    width: 95%;
+    width: 100%;
+    margin-left: 0;
+    bottom: 4px;
 
 `
 export const ContainerSobre = styled(Container)`
