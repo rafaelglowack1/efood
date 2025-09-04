@@ -1,27 +1,33 @@
-import type { ItemCarrinho } from "../pages/Sobre"; 
+
 import { Title } from "../Body/style"
 import { SecaoDetalhes, Card, BotaoComprar, Overlay, TextDes } from "./styles"
+import { useDispatch } from "react-redux";
+import { addItem } from "../../Store/reducers/cart";
+import type { Cardapio } from "../Body";
 
 type DetalhesProps = {
   open: boolean;
-  eviarPrato: ItemCarrinho;
+  eviarPrato: Cardapio;
   onClose: () => void;
-  setCarrinho: React.Dispatch<React.SetStateAction<ItemCarrinho[]>>;
 }
 
-const Detalhes = ({ open, eviarPrato, onClose, setCarrinho }: DetalhesProps) => (
+const Detalhes = ({ open, eviarPrato, onClose, }: DetalhesProps) => {
+
+  const dispatch = useDispatch()
+
+  return(
   <SecaoDetalhes open={open}>
     <Overlay onClick={onClose} />
     <Card>
-      <img src={eviarPrato.img} alt={eviarPrato.nome} />
+      <img src={eviarPrato.foto} alt={eviarPrato.nome} />
       <div>
         <Title>{eviarPrato.nome}</Title>
         <TextDes>{eviarPrato.descricao}</TextDes>
-        <TextDes>Serve: {eviarPrato.serve}</TextDes>
+        <TextDes>Serve: {eviarPrato.porcao}</TextDes>
         <BotaoComprar
           type="button"
           onClick={() => {
-            setCarrinho(prev => [...prev, eviarPrato]);
+            dispatch(addItem(eviarPrato))
             onClose();
           }}
         >
@@ -30,6 +36,6 @@ const Detalhes = ({ open, eviarPrato, onClose, setCarrinho }: DetalhesProps) => 
       </div>
     </Card>
   </SecaoDetalhes>
-)
+)}
 
 export default Detalhes

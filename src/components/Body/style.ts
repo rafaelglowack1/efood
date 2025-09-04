@@ -30,6 +30,7 @@ export const Header = styled.div`
 export const Title = styled.h2`
     font-size: 16px;
     font-weight: bold;
+    margin: 6px 0 6px 6px
 `
 export const Avaliacoes = styled.div`
   display: flex;
@@ -41,7 +42,7 @@ export const Avaliacoes = styled.div`
 export const Text = styled.p`
     font-size: 14px;
     line-height: 22px;
-    margin: 0 6px 18px 6px;
+    margin: 0 6px 0px 6px;
 `
 export const Botao = styled.a`
     diplay: block;

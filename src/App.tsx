@@ -1,19 +1,24 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
 import Sobre from "./components/pages/Sobre"
 import Home from "./components/pages/Home";
 import Footer from "./components/Footer";
 import { GlobalStyle } from "./styles";
+import { store } from "./Store";
 
 function App() {
   return (
-    <Router>
-      <GlobalStyle />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/sobre/:id" element={<Sobre />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <Provider store={store}>
+
+      <Router>
+        <GlobalStyle />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/sobre/:id" element={<Sobre />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </Provider>
   )
 }
 

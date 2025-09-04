@@ -1,43 +1,50 @@
+import { useSelector, useDispatch } from "react-redux";
+import type { RootState } from "../../../Store";
+import { removeItem } from "../../../Store/reducers/cart";
 import lixo from "../../../images/trash.png";
 import { Btn, Caixa, Div, Preco, Trash } from "../style";
-import type { ItemCarrinho } from "../../pages/Sobre";
 
-type Props = {
-  itens: ItemCarrinho[];
-  setItens: React.Dispatch<React.SetStateAction<ItemCarrinho[]>>;
-  onContinuar: () => void;
-};
+const Carrinho = ({ onContinuar }: { onContinuar: () => void }) => {
+  const dispatch = useDispatch();
+  const itens = useSelector((state: RootState) => state.cart.items);
 
-const Carrinho = ({ itens, setItens, onContinuar }: Props) => {
-  const removerItem = (index: number) => {
-    setItens(prev => prev.filter((_, i) => i !== index));
-  };
+  const valorTotal = itens.reduce((acc, item) => acc + item.preco * item.quantity, 0);
 
   return (
     <>
       <div>
-        {itens.map((carr, i) => (
-          <Caixa key={i}>
-            <Div>
-              <img src={carr.img} alt={carr.nome} />
-            </Div>
-            <Div>
-              <h3>{carr.nome}</h3>
-              <p>R$ {carr.preco.toFixed(2)}</p>
-            </Div>
-            <Trash onClick={() => removerItem(i)}>
-              <img src={lixo} alt="Remover" />
-            </Trash>
-          </Caixa>
-        ))}
+        {itens.length === 0 ? (
+          <h2 style={{margin: "20px"}}>O carrinho está vazio</h2>
+        ) : (
+          itens.map((item) => (
+            <Caixa key={item.id}>
+              <Div>
+                <img src={item.foto} alt={item.nome} />
+              </Div>
+              <Div>
+                <h3>{item.nome}</h3>
+                <p>
+                  {item.quantity} Prato(s) = R$ {(item.preco * item.quantity).toFixed(2)}
+                </p>
+              </Div>
+              <Trash onClick={() => dispatch(removeItem(item.id))}>
+                <img src={lixo} alt="Remover" />
+              </Trash>
+            </Caixa>
+          ))
+        )}
       </div>
 
-      <Preco>
-        <p>Valor Total:</p>
-        <p>R$ {itens.reduce((acc, item) => acc + item.preco, 0).toFixed(2)}</p>
-      </Preco>
+      {itens.length > 0 && (
+        <>
+          <Preco>
+            <p>Valor Total:</p>
+            <p>R$ {valorTotal.toFixed(2)}</p>
+          </Preco>
 
-      <Btn onClick={onContinuar}>Continuar com a entrega</Btn>
+          <Btn onClick={onContinuar}>Continuar com a entrega</Btn>
+        </>
+      )}
     </>
   );
 };
