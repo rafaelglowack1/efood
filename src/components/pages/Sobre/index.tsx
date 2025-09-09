@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { GlobalStyle } from "../../../styles"
-import { SecaoSobre, TextSobre, TitleSobre, BtnSobre, ContainerSobre } from "./styles"
+
 import HeaderSobre from "../../HeaderSobre"
 import Detalhes from "../../Detalhes" 
+
 import type { Cardapio, Restaurantes } from "../../Body"
 
-// Tipo do item do carrinho
+import { GlobalStyle } from "../../../styles"
+import { SecaoSobre, TextSobre, TitleSobre, BtnSobre, ContainerSobre } from "./styles"
 
 const Sobre = () => {
   const { id } = useParams<{ id: string }>()
@@ -18,7 +19,6 @@ const Sobre = () => {
 
   useEffect(() => {
     if (!id) return
-
     fetch("https://ebac-fake-api.vercel.app/api/efood/restaurantes")
       .then(res => res.json())
       .then((dados: Restaurantes[]) => {

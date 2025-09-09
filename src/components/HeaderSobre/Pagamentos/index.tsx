@@ -1,17 +1,24 @@
-import { Btn } from "../style";
-import { Box, Campo } from "../FormularioEntrega/styles";
-import { BoxDiv } from "./styles";
+import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as yup from 'yup';
-import { Error as ErrorForm } from "../FormularioEntrega/styles";
-import { useSelector, useDispatch } from "react-redux";
-import type { RootState } from "../../../Store";
+
 import { clearCart } from "../../../Store/reducers/cart";
 
+import type { RootState } from "../../../Store";
 import type { DeliveryFormValues } from "../FormularioEntrega";
-type KnownCartItem = { id: number; preco?: number; price?: number; quantity?: number };
 
-type Props = {
+import { Box, Campo } from "../FormularioEntrega/styles";
+import { BoxDiv } from "./styles";
+import { Btn } from "../style";
+import { Error as ErrorForm } from "../FormularioEntrega/styles";
+
+type KnownCartItem = { 
+  id: number; 
+  preco?: number; 
+  price?: number; 
+  quantity?: number };
+
+type Props = { 
   delivery: DeliveryFormValues;
   onPagarConcluido: (data: string | number | null) => void;
   onVoltar: () => void;
@@ -51,13 +58,12 @@ const Pagamento = ({ delivery, onPagarConcluido, onVoltar }: Props) => {
       setSubmitting(true);
 
       try {
-        // Monta products a partir do cart
         const products = cartItems.map((item) => ({
           id: item.id,
-          price: (item as KnownCartItem).preco ?? (item as KnownCartItem).price ?? 0, // fallback se seus objetos diferirem
+          price: (item as KnownCartItem).preco ?? (item as KnownCartItem).price ?? 0, 
         }));
 
-        // Corpo exatamente como a API espera
+        // Corpo como a API espera
         const body = {
           products,
           delivery: {
@@ -83,8 +89,6 @@ const Pagamento = ({ delivery, onPagarConcluido, onVoltar }: Props) => {
           },
         };
 
-        console.log("Checkout body:", body);
-
         const response = await fetch("https://ebac-fake-api.vercel.app/api/efood/checkout", {
           method: "POST",
           headers: {
@@ -92,28 +96,15 @@ const Pagamento = ({ delivery, onPagarConcluido, onVoltar }: Props) => {
           },
           body: JSON.stringify(body),
         });
-
         const data = await response.json();
-        console.log("Checkout response:", data);
 
         if (!response.ok) {
           throw new Error(`Checkout falhou: ${response.status} - ${JSON.stringify(data)}`);
         }
 
-        // Ajuste aqui dependendo da estrutura da API
-        const orderId =
-          (data.orderId as string | number | undefined) ??
-          null;
-
-        if (!orderId) {
-          console.error("orderId não encontrado na resposta!", data);
-          alert("Não foi possível obter o número do pedido.");
-          return;
-        }
-
         // sucesso: limpa carrinho e envia orderId para o HeaderSobre
         dispatch(clearCart());
-        onPagarConcluido(orderId);
+        onPagarConcluido(data.orderId);
 
       } catch (err) {
         console.error("Erro ao finalizar compra:", err);

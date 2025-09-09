@@ -1,12 +1,13 @@
-// src/components/HeaderSobre/MensagemFinal.tsx
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
 import { Btn } from "../style";
 import { Paragrafo } from "./style";
+
 import { clearCart } from "../../../Store/reducers/cart";
 
 type Props = {
-  orderId?: string | number | null;
+  orderId: string | number | null;
 };
 
 const MensagemFinal = ({ orderId }: Props) => {
@@ -14,15 +15,14 @@ const MensagemFinal = ({ orderId }: Props) => {
   const navigate = useNavigate();
 
   const concluirPedido = () => {
-    dispatch(clearCart()); // segurança: esvazia o carrinho
-    navigate("/"); // volta pra home
-  };
 
-  const displayId = orderId ?? "—";
+    dispatch(clearCart()); 
+    navigate("/"); 
+  };
 
   return (
     <div>
-      <h2 style={{ margin: "20px" }}>Pedido realizado - {String(displayId)}</h2>
+      <h2 style={{ margin: "20px" }}>Pedido realizado - {orderId}</h2>
       <Paragrafo>Estamos felizes em informar que seu pedido já está em processo de preparação e, em breve, será entregue no endereço fornecido.</Paragrafo>
       <Paragrafo>Nossos entregadores não estão autorizados a realizar cobranças extras.</Paragrafo>
       <Paragrafo>Lembre-se de higienizar as mãos após receber o pedido, garantindo sua segurança.</Paragrafo>

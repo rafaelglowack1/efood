@@ -1,8 +1,8 @@
-import { Secao, Text, Title, Botao, Tipo, TipoContainer, Container, Header, Avaliacoes } from "./style"
-import estrela from "../../images/estrela.png"
-
 import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
+
+import { Secao, Text, Title, Botao, Tipo, TipoContainer, Container, Header, Avaliacoes } from "./style"
+import estrela from "../../images/estrela.png"
 
 export interface Cardapio {
     id: number
@@ -39,7 +39,7 @@ const Body = () => {
   return (
     <Container>
       {dadosRestaurantes.map((rest) => (
-        <Secao key={rest.id}>
+        <Secao key={rest.id} >
           <TipoContainer>
             {rest.destacado && (
               <Tipo>
@@ -59,7 +59,7 @@ const Body = () => {
                 
             </Avaliacoes>
           </Header>
-          <Text>{rest.descricao}</Text>
+          <Text >{rest.descricao}</Text>
           <Link to={`/sobre/${rest.id}`}>
             <Botao
               onClick={() => {

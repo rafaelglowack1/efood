@@ -1,17 +1,14 @@
-import { Btn } from "../style";
-import { Campo, Box, Error } from "./styles";
-
 import {useFormik } from 'formik';
-
 import * as yup from 'yup'
 
-
+import { Btn } from "../style";
+import { Campo, Box, Error } from "./styles";
 
 export interface DeliveryFormValues {
   receber: string;
   endereco: string;
   cidade: string;
-  cep: string; // string sem formatação (apenas dígitos)
+  cep: string;
   numero: string;
   complemento?: string;
 }
@@ -49,7 +46,6 @@ const FormularioEntrega = ({ onVoltar,onFinalizar }: Props) => {
       complemento: yup.string().nullable(),
     }),
     onSubmit: (values) => {
-      // passa os dados pro HeaderSobre
       onFinalizar(values);
     },
   });

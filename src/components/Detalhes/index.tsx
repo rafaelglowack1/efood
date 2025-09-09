@@ -1,8 +1,10 @@
+import { useDispatch } from "react-redux";
 
 import { Title } from "../Body/style"
 import { SecaoDetalhes, Card, BotaoComprar, Overlay, TextDes } from "./styles"
-import { useDispatch } from "react-redux";
+
 import { addItem } from "../../Store/reducers/cart";
+
 import type { Cardapio } from "../Body";
 
 type DetalhesProps = {
@@ -12,7 +14,6 @@ type DetalhesProps = {
 }
 
 const Detalhes = ({ open, eviarPrato, onClose, }: DetalhesProps) => {
-
   const dispatch = useDispatch()
 
   return(

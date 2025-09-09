@@ -43,6 +43,7 @@ export const Text = styled.p`
     font-size: 14px;
     line-height: 22px;
     margin: 0 6px 0px 6px;
+    padding-bottom: 20px;
 `
 export const Botao = styled.a`
     diplay: block;

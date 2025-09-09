@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
+
 import type { RootState } from "../../../Store";
 import { removeItem } from "../../../Store/reducers/cart";
+
 import lixo from "../../../images/trash.png";
 import { Btn, Caixa, Div, Preco, Trash } from "../style";
 

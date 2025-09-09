@@ -17,6 +17,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+
     addItem(state, action: PayloadAction<Cardapio>) {
       const existingItem = state.items.find(item => item.id === action.payload.id);
       if (existingItem) {
@@ -25,17 +26,18 @@ const cartSlice = createSlice({
         state.items.push({ ...action.payload, quantity: 1 });
       }
     },
+
     removeItem(state, action: PayloadAction<number>) {
       const existingItem = state.items.find(item => item.id === action.payload);
       if (!existingItem) return;
 
       if (existingItem.quantity > 1) {
-        existingItem.quantity -= 1; // diminui 1 unidade
+        existingItem.quantity -= 1; 
       } else {
-        // remove do array se só tinha 1
         state.items = state.items.filter(item => item.id !== action.payload);
       }
     },
+
     clearCart(state) {
       state.items = [];
     },
