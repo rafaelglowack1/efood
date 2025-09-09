@@ -24,3 +24,10 @@ export const Box = styled.div`
     }
 
 `
+export const Error = styled.div`
+    color : #9e0000ff;
+    width: 98%;
+    font-weight: bold;
+    position: absolute;
+    text-align: end;
+`

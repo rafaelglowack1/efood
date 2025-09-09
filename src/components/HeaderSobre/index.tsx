@@ -4,9 +4,10 @@ import { BackgroundSobre, Box, Components, SideBar, Img, Overlay } from "./style
 import { Link } from "react-router-dom";
 import Carrinho from "./Carrinho";
 import FormularioEntrega from "./FormularioEntrega";
+import type { DeliveryFormValues } from "./FormularioEntrega";
 import Pagamento from "./Pagamentos";
 import MensagemFinal from "./MensagemFinal";
-import type { RootState } from "../../Store";
+import type { RootState } from "../../Store"; // ajuste se necessário
 import { useSelector } from "react-redux";
 
 type Props = {
@@ -21,9 +22,27 @@ const HeaderSobre = ({ restaurante, tipo, capa }: Props) => {
   const [mostrarPagamento, setMostrarPagamento] = useState(false);
   const [pedidoFinalizado, setPedidoFinalizado] = useState(false);
 
+  const [deliveryData, setDeliveryData] = useState<DeliveryFormValues | null>(null);
+  const [orderId, setOrderId] = useState<string | number | null>(null);
+
   const toggleSidebar = () => setSideOpen(!sideOpen);
 
   const itensCarrinho = useSelector((state: RootState) => state.cart.items);
+
+    // recebe os valores do formulário de entrega (child -> parent)
+  const handleFinalizarEntrega=  (values: DeliveryFormValues) => {
+    setOrderId(orderId);
+    setDeliveryData(values);
+    setMostrarFormulario(false);
+    setMostrarPagamento(true);
+  }
+
+  // chamado quando o pagamento for concluído com sucesso
+  const handlePagamentoConcluido = () => {
+    setPedidoFinalizado(true);
+    setMostrarPagamento(false);
+    setMostrarFormulario(false);
+  }
 
   return (
     <>
@@ -54,19 +73,16 @@ const HeaderSobre = ({ restaurante, tipo, capa }: Props) => {
             {/* Formulário de entrega */}
             {mostrarFormulario && !mostrarPagamento && !pedidoFinalizado && (
               <FormularioEntrega
-                onFinalizar={() => setMostrarPagamento(true)}
+                onFinalizar={handleFinalizarEntrega}
                 onVoltar={() => setMostrarFormulario(false)}
               />
             )}
 
             {/* Pagamento */}
-            {mostrarPagamento && !pedidoFinalizado && (
+            {mostrarPagamento && !pedidoFinalizado && deliveryData && (
               <Pagamento
-                onPagar={() => {
-                  setPedidoFinalizado(true);
-                  setMostrarPagamento(false);
-                  setMostrarFormulario(false);
-                }}
+                delivery={deliveryData}
+                onPagarConcluido={handlePagamentoConcluido}
                 onVoltar={() => {
                   setMostrarPagamento(false);
                   setMostrarFormulario(true);
@@ -74,9 +90,10 @@ const HeaderSobre = ({ restaurante, tipo, capa }: Props) => {
               />
             )}
 
+
             {/* Mensagem final */}
             {pedidoFinalizado && (
-              <MensagemFinal />
+              <MensagemFinal orderId={orderId} />
             )}
           </SideBar>
         </Box>

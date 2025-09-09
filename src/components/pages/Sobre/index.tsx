@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import { GlobalStyle } from "../../../styles"
 import { SecaoSobre, TextSobre, TitleSobre, BtnSobre, ContainerSobre } from "./styles"
 import HeaderSobre from "../../HeaderSobre"
-import Detalhes from "../../Detalhes" // use o arquivo de tipos centralizado
+import Detalhes from "../../Detalhes" 
 import type { Cardapio, Restaurantes } from "../../Body"
 
 // Tipo do item do carrinho

@@ -1,39 +1,37 @@
+// src/components/HeaderSobre/MensagemFinal.tsx
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Btn } from "../style";
 import { Paragrafo } from "./style";
 import { clearCart } from "../../../Store/reducers/cart";
 
-const MensagemFinal = () => {
+type Props = {
+  orderId?: string | number | null;
+};
+
+const MensagemFinal = ({ orderId }: Props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const concluirPedido = () => {
-    dispatch(clearCart());  // esvazia o carrinho
-    navigate("/");          // redireciona para a home
+    dispatch(clearCart()); // segurança: esvazia o carrinho
+    navigate("/"); // volta pra home
   };
+
+  const displayId = orderId ?? "—";
 
   return (
     <div>
-      <h2 style={{ margin: "20px" }}>Pedido realizado - {'{'}ORDER_Id{'}'}</h2>
-      <Paragrafo>
-        Estamos felizes em informar que seu pedido já está em processo de preparação e, em breve, será entregue no endereço fornecido.
-      </Paragrafo>
-      <Paragrafo>
-        Nossos entregadores não estão autorizados a realizar cobranças extras.
-      </Paragrafo>
-      <Paragrafo>
-        Lembre-se de higienizar as mãos após receber o pedido, garantindo sua segurança.
-      </Paragrafo>
-      <Paragrafo>
-        Esperamos que desfrute de uma deliciosa experiência gastronômica. Bom apetite!
-      </Paragrafo>
+      <h2 style={{ margin: "20px" }}>Pedido realizado - {String(displayId)}</h2>
+      <Paragrafo>Estamos felizes em informar que seu pedido já está em processo de preparação e, em breve, será entregue no endereço fornecido.</Paragrafo>
+      <Paragrafo>Nossos entregadores não estão autorizados a realizar cobranças extras.</Paragrafo>
+      <Paragrafo>Lembre-se de higienizar as mãos após receber o pedido, garantindo sua segurança.</Paragrafo>
+      <Paragrafo>Esperamos que desfrute de uma deliciosa experiência gastronômica. Bom apetite!</Paragrafo>
 
-      <Btn onClick={concluirPedido}>
-        Concluir
-      </Btn>
+      <Btn onClick={concluirPedido}>Concluir</Btn>
     </div>
   );
 };
 
 export default MensagemFinal;
+

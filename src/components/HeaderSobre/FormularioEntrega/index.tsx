@@ -1,42 +1,144 @@
 import { Btn } from "../style";
-import { Campo, Box } from "./styles";
+import { Campo, Box, Error } from "./styles";
 
+import {useFormik } from 'formik';
+
+import * as yup from 'yup'
+
+
+
+export interface DeliveryFormValues {
+  receber: string;
+  endereco: string;
+  cidade: string;
+  cep: string; // string sem formatação (apenas dígitos)
+  numero: string;
+  complemento?: string;
+}
 type Props = {
-  onFinalizar: () => void;
+  onFinalizar: (values: DeliveryFormValues) => void;
   onVoltar: () => void;
 };
 
-const FormularioEntrega = ({ onFinalizar, onVoltar }: Props) => (
+const FormularioEntrega = ({ onVoltar,onFinalizar }: Props) => {
+  const form = useFormik<DeliveryFormValues>({
+    initialValues: {
+      receber: "",
+      endereco: "",
+      cidade: "",
+      cep: "",
+      numero: "",
+      complemento: "",
+    },
+    validationSchema: yup.object({
+      receber: yup
+        .string()
+        .required("Obrigatório")
+        .min(6, "Mínimo 6 caracteres")
+        .matches(/^[A-Za-zÀ-ÿ\s]+$/, "Digite apenas letras"),
+      endereco: yup.string().required("Obrigatório").min(6, "Mínimo 6 caracteres"),
+      cidade: yup.string().required("Obrigatório").min(2, "Mínimo 2 caracteres"),
+      cep: yup
+        .string()
+        .required("Obrigatório")
+        .transform((value, originalValue) =>
+          typeof originalValue === "string" ? originalValue.replace(/\D/g, "") : value
+        )
+        .length(8, "CEP deve ter 8 dígitos"),
+      numero: yup.string().required("Obrigatório"),
+      complemento: yup.string().nullable(),
+    }),
+    onSubmit: (values) => {
+      // passa os dados pro HeaderSobre
+      onFinalizar(values);
+    },
+  });
+  return(
   <>
     <h2 style={{ padding: "12px" }}>Dados para entrega</h2>
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        onFinalizar();
-      }}
+      onSubmit={form.handleSubmit}
       style={{ display: "flex", flexDirection: "column", gap: "12px", padding: "12px" }}
     > <label>Quem irá receber</label>
-      <Campo type="text"  required />
+      <div style={{ position: 'relative' }}>
+        <Campo
+          name="receber"
+          value={form.values.receber}
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
+             />
+        {form.touched.receber && form.errors.receber && (
+          <Error>{form.errors.receber as string}</Error>
+          )}
+      </div>
       <label>Endereço</label>
-      <Campo type="text"  required />
+      <div style={{ position: 'relative' }}>
+        <Campo
+          name="endereco"
+          value={form.values.endereco}
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
+             />
+             {form.touched.endereco && form.errors.endereco && (
+        <Error>{form.errors.endereco as string}</Error>
+          )}
+      </div>
       <label>Cidade</label>
-      <Campo type="text"  required />
+      <div style={{ position: 'relative' }}>
+        <Campo
+          name="cidade"
+          value={form.values.cidade}
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
+             />
+             {form.touched.cidade && form.errors.cidade && (
+        <Error>{form.errors.cidade as string}</Error>
+          )}
+      </div>
       <Box>
         <div>
+
           <label>CEP</label>
-          <Campo type="number"  required />
+        <div style={{ position: 'relative' }}>
+          <Campo
+            name="cep"
+            value={form.values.cep}
+            onChange={form.handleChange}
+            onBlur={form.handleBlur}
+              />
+             {form.touched.cep && form.errors.cep && (
+          <Error>{form.errors.cep as string}</Error>
+          )}
+      </div>
         </div>
         <div>
           <label>Número</label>
-          <Campo type="number"  required />
+       <div style={{ position: 'relative' }}>
+        <Campo
+          name="numero"
+          value={form.values.numero}
+          onChange={form.handleChange}
+          onBlur={form.handleBlur}
+             />
+             {form.touched.numero && form.errors.numero && (
+        <Error>{form.errors.numero as string}</Error>
+          )}
+      </div>
         </div>
       </Box>
-      <label>Complemento (opcional)</label>
-      <Campo type="text" />
-      <Btn type="submit">Continuar com o pagamento</Btn>
+      <label>Complemento</label>
+      <Campo  
+        name="complemento"
+        value={form.values.complemento}
+        onChange={form.handleChange}
+        onBlur={form.handleBlur}
+     />
+      <Btn  type="submit" >Continuar com o pagamento</Btn>
       <Btn type="button" onClick={onVoltar}>Voltar para o Carrinho</Btn>
     </form>
   </>
-);
+)};
 
 export default FormularioEntrega;
+
+
