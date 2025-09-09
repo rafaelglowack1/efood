@@ -28,6 +28,7 @@ const HeaderSobre = ({ restaurante, tipo, capa }: Props) => {
   const [deliveryData, setDeliveryData] = useState<DeliveryFormValues | null>(null);
   const [orderId, setOrderId] = useState<string | number | null>(null);
 
+
   const itensCarrinho = useSelector((state: RootState) => state.cart.items);
 
   const toggleSidebar = () => setSideOpen(!sideOpen);
@@ -42,6 +43,7 @@ const HeaderSobre = ({ restaurante, tipo, capa }: Props) => {
     setMostrarPagamento(false);
     setMostrarFormulario(false);
   }
+
 
   return (
     <>
@@ -72,8 +74,10 @@ const HeaderSobre = ({ restaurante, tipo, capa }: Props) => {
             {/* Formulário de entrega */}
             {mostrarFormulario && !mostrarPagamento && !pedidoFinalizado && (
               <FormularioEntrega
+                initialValues={deliveryData ?? undefined}
                 onFinalizar={handleFinalizarEntrega}
                 onVoltar={() => setMostrarFormulario(false)}
+                onChangeValues={setDeliveryData} 
               />
             )}
 

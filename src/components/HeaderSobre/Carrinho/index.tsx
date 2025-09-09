@@ -14,7 +14,7 @@ const Carrinho = ({ onContinuar }: { onContinuar: () => void }) => {
 
   return (
     <>
-      <div>
+      <div style={{padding: '8px' }}>
         {itens.length === 0 ? (
           <h2 style={{margin: "20px"}}>O carrinho está vazio</h2>
         ) : (
@@ -38,14 +38,14 @@ const Carrinho = ({ onContinuar }: { onContinuar: () => void }) => {
       </div>
 
       {itens.length > 0 && (
-        <>
+        <div style={{padding: '8px' }}>
           <Preco>
             <p>Valor Total:</p>
             <p>R$ {valorTotal.toFixed(2)}</p>
           </Preco>
 
           <Btn onClick={onContinuar}>Continuar com a entrega</Btn>
-        </>
+        </div>
       )}
     </>
   );

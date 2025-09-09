@@ -3,6 +3,7 @@ import * as yup from 'yup'
 
 import { Btn } from "../style";
 import { Campo, Box, Error } from "./styles";
+import React from 'react';
 
 export interface DeliveryFormValues {
   receber: string;
@@ -15,11 +16,13 @@ export interface DeliveryFormValues {
 type Props = {
   onFinalizar: (values: DeliveryFormValues) => void;
   onVoltar: () => void;
+  initialValues?: DeliveryFormValues;    
+  onChangeValues?: (values: DeliveryFormValues) => void; 
 };
 
-const FormularioEntrega = ({ onVoltar,onFinalizar }: Props) => {
+const FormularioEntrega = ({ onVoltar,onFinalizar, initialValues, onChangeValues }: Props) => {
   const form = useFormik<DeliveryFormValues>({
-    initialValues: {
+    initialValues: initialValues ?? {
       receber: "",
       endereco: "",
       cidade: "",
@@ -27,6 +30,7 @@ const FormularioEntrega = ({ onVoltar,onFinalizar }: Props) => {
       numero: "",
       complemento: "",
     },
+    enableReinitialize: true,
     validationSchema: yup.object({
       receber: yup
         .string()
@@ -49,9 +53,14 @@ const FormularioEntrega = ({ onVoltar,onFinalizar }: Props) => {
       onFinalizar(values);
     },
   });
+  React.useEffect(() => {
+  if (onChangeValues) {
+    onChangeValues(form.values);
+  }
+}, [form.values, onChangeValues]);
   return(
   <>
-    <h2 style={{ padding: "12px" }}>Dados para entrega</h2>
+    <h2 style={{ padding: "12px" }}>Entrega</h2>
     <form
       onSubmit={form.handleSubmit}
       style={{ display: "flex", flexDirection: "column", gap: "12px", padding: "12px" }}
@@ -122,14 +131,14 @@ const FormularioEntrega = ({ onVoltar,onFinalizar }: Props) => {
       </div>
         </div>
       </Box>
-      <label>Complemento</label>
+      <label>Complemento (opcional)</label>
       <Campo  
         name="complemento"
         value={form.values.complemento}
         onChange={form.handleChange}
         onBlur={form.handleBlur}
      />
-      <Btn  type="submit" >Continuar com o pagamento</Btn>
+      <Btn style={{marginTop: '24px'}} type="submit" >Continuar com o pagamento</Btn>
       <Btn type="button" onClick={onVoltar}>Voltar para o Carrinho</Btn>
     </form>
   </>

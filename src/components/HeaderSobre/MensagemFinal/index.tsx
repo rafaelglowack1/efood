@@ -21,14 +21,14 @@ const MensagemFinal = ({ orderId }: Props) => {
   };
 
   return (
-    <div>
+    <div style={{padding: '8px'}}>
       <h2 style={{ margin: "20px" }}>Pedido realizado - {orderId}</h2>
       <Paragrafo>Estamos felizes em informar que seu pedido já está em processo de preparação e, em breve, será entregue no endereço fornecido.</Paragrafo>
       <Paragrafo>Nossos entregadores não estão autorizados a realizar cobranças extras.</Paragrafo>
       <Paragrafo>Lembre-se de higienizar as mãos após receber o pedido, garantindo sua segurança.</Paragrafo>
       <Paragrafo>Esperamos que desfrute de uma deliciosa experiência gastronômica. Bom apetite!</Paragrafo>
 
-      <Btn onClick={concluirPedido}>Concluir</Btn>
+      <Btn style={{marginTop: '24px'}} onClick={concluirPedido}>Concluir</Btn>
     </div>
   );
 };

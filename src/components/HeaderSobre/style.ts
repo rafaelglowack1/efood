@@ -44,6 +44,8 @@ export const SideBar = styled.div<SidebarProps>`
   top: 0;
   right: 0;
 
+  padding: 4px;
+
   transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
   transition: transform 0.3s ease;
   z-index: 10;
@@ -100,25 +102,25 @@ export const Overlay = styled.div<SidebarProps>`
   z-index: 5; 
 `
 export const Caixa = styled.div`
-  width: 90%;
+  position: relative;
+  width: 100%;
   margin: 20px auto 0px;
-  border-radius: 4px;
-  height: 124px;
+  border-radius: 2px;
+  height: auto;
   display: flex;
   background-color: ${cores.bege};
   color: ${cores.laranja};
 `;
 export const Div = styled.div`
+    
     h3{
       width: 180px;
-      text-align: center;
-      margin: 20px 12px ;
-      padding: 6px;
+      margin: 20px 0;
     }
 
     p{
-      text-align: center;
       margin: 12px 0 12px 0;
+      font-size: 14px;
     }
     
 
@@ -126,7 +128,7 @@ export const Div = styled.div`
       width: 100px;
       display: block;
       height: 100px;
-      border-radius: 4px; 
+      border-radius: 2px; 
       padding: 12px;
     }
 
@@ -134,10 +136,12 @@ export const Div = styled.div`
 export const Trash = styled.div`
   width: 50px;
   display: block;
-  margin: 40px 0 0 12px;
+  position: absolute;
+  top: 50px;
+  right: 0;
 
   img{
-    width: 26px;
+    width: 20px;
     cursor: pointer;
 
     
@@ -146,12 +150,14 @@ export const Trash = styled.div`
 export const Btn = styled.button`
   background-color: ${cores.bege};
   color: ${cores.laranja};
-  width: 90%;
+  width: 100%;
   display: block;
-  margin: 10px auto;
+  margin: 2px auto 0 0;
+  font-size: 16px;
+  font-weight: bold;
   border: none;
-  padding: 12px;
-  border-radius: 4px;
+  padding: 6px;
+  border-radius: 2px;
   cursor: pointer;
 `
 export const Preco = styled.div`

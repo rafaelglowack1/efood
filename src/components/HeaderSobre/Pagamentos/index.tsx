@@ -36,6 +36,9 @@ const Pagamento = ({ delivery, onPagarConcluido, onVoltar }: Props) => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
 
+  const total = cartItems.reduce((acc, item) => acc + item.preco * item.quantity, 0);
+
+
    const form = useFormik<PaymentFormValues>({
     initialValues: {
       nome: "",
@@ -116,7 +119,7 @@ const Pagamento = ({ delivery, onPagarConcluido, onVoltar }: Props) => {
   });
   return(
   <>
-    <h2 style={{ padding: "12px" }}>Pagamento</h2>
+    <h3 style={{ padding: "12px" }}>Pagamento - Valor a pagar R$ <span>{total.toFixed(2)}</span></h3>
     <form
       onSubmit={form.handleSubmit}
       style={{ display: "flex", flexDirection: "column", gap: "12px", padding: "12px" }}
@@ -193,8 +196,8 @@ const Pagamento = ({ delivery, onPagarConcluido, onVoltar }: Props) => {
       </div>
         </div>
       </Box>
-      <Btn type="submit">Pagar</Btn>
-      <Btn type="button" onClick={onVoltar}>Voltar</Btn>
+      <Btn style={{marginTop: '24px'}} type="submit">Finalizar Pagamento</Btn>
+      <Btn type="button" onClick={onVoltar}>Voltar para a edição de endereço</Btn>
     </form>
   </>
 )};
