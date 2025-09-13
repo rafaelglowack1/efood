@@ -25,8 +25,8 @@ const Carrinho = ({ onContinuar }: { onContinuar: () => void }) => {
               </Div>
               <Div>
                 <h3>{item.nome}</h3>
-                <p>
-                  {item.quantity} Prato(s) = R$ {(item.preco * item.quantity).toFixed(2)}
+                <p style={{fontWeight: 400, fontSize: '16px'}}>
+                  R$ {(item.preco * item.quantity).toFixed(2)}
                 </p>
               </Div>
               <Trash onClick={() => dispatch(removeItem(item.id))}>
